@@ -141,13 +141,15 @@ def GetURIs(tracks, header):
     track_URIs = []
 
     for track_title in tracks:
+        if track_title == "":
+            continue
         id_request_url = SEARCH_BASE_URL + 'q=' + track_title + '&type=' + 'track'
         id_request = requests.get(id_request_url, headers=header) 
         json_id = id_request.json()
         items = json_id['tracks']['items']
         if len(items) > 0:
             track = items[0]
-            #print(track['name'], track['uri'])
+            print(track['name'])
             track_URIs.append(track['uri'])
 
     #print(track_URIs)
