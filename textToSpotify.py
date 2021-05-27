@@ -5,16 +5,18 @@ import requests
 import json
 
 '''
-textToSpotify
+TextToSpotify
 
 Approach : 
-Text file with song names and artists
+Read file name from user 
 Read file and create list of song names and artists 
-Get authentication token for Spotify API
-Use auth token to send in queries to API 
-Use the list from text file and get IDs/URLs for each song in list if available
-Create a playlist from the IDs/URLs 
-Provide the created playlist to User 
+Get authentication token for Spotify Web API
+Create a header with authentication token for all requests
+Create a playlist in Spotify after taking playlist name and description from user
+Use the list from text file and get IDs/URIs for each song in list if available
+Create a URI string from the list of URIs for the song
+Create a playlist by adding tracks from the file from the URI string
+Provide the created playlist URL to User 
 '''
 
 #Gets filename from user
