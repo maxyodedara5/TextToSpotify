@@ -33,7 +33,7 @@ When we run the program, User will be prompted to enter the name of text file
 When filename is provided, a browser window should popup and ask you for authentication which in turn will provide an access token to be used for further requests
 
 
-![Access Image ](AccessSpotify.bmp)
+![Access Image ](AccessSpotify.png)
 
 Then we provide Playlist name and description which will be reflected in Spotify
 While making the example I set
@@ -41,6 +41,8 @@ While making the example I set
 * Playlist description : Songs we listen on repeat some of my favourites
 
 After giving the playlist details, program will Search on Spotify for the listed tracks and if found will list them out in your terminal and then add them to your playlist
+
+Created playlist link [textToSpotify ](https://open.spotify.com/playlist/3jsD7ExjSnCFBlJtSBPLBR)
 
 Once done will print out a link for your playlist, the playlist should be present in your Spotify account to listen anytime
 
