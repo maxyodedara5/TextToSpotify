@@ -1,15 +1,14 @@
 # TextToSpotify
 
-# TextToSpotify
+Program for creating a Spotify playlist from a text file 
 
-Program for creating a Spotify playlist from a text list 
-
-Why ? : Some of the playlists on internet are usually listed out in text format, instead of searching each song manually and creating a playlist. We can use this Utility for creating the spotify playlist programmatically
+Why ? : Some of the playlists on internet are usually listed out in text format, instead of searching each song manually and creating a playlist. We can use this Program for creating the spotify playlist programmatically
 
 ## Dependencies
 
 Following libraries need to be installed  
 * spotipy
+* requests
 
 ## Working logic
 
@@ -27,25 +26,23 @@ Approach :
 
 ### Example 
 
-For the file present
+When we run the program, User will be prompted to enter the name of text file
 
 [SamplePlaylist.txt ](https://raw.githubusercontent.com/maxyodedara5/TextToSpotify/master/SamplePlaylist.txt)
 
-When we run the program, browser window should popup and ask you for authentication which in turn will provide an access token to be used for further requests
+When filename is provided, a browser window should popup and ask you for authentication which in turn will provide an access token to be used for further requests
 
 
 ![Access Image ](AccessSpotify.bmp)
 
 Then we provide Playlist name and description which will be reflected in Spotify
-While making the example I kept
-Playlist name : textToSpotify
-Playlist description : Songs we listen on repeat some of my favourites
+While making the example I set
+* Playlist name : textToSpotify
+* Playlist description : Songs we listen on repeat some of my favourites
 
-After giving the playlist details, program will Search on Spotify for the listed tracks and if found will list then out in your terminal and then add them to your playlist
+After giving the playlist details, program will Search on Spotify for the listed tracks and if found will list them out in your terminal and then add them to your playlist
 
-Once done will print out a link for your playlist, the playlist should be present in your Spotify account to listen anytime !
-
-
+Once done will print out a link for your playlist, the playlist should be present in your Spotify account to listen anytime
 
 ## License
 

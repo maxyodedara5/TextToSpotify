@@ -163,6 +163,7 @@ def GetURIs(tracks, header):
     SEARCH_BASE_URL = 'https://api.spotify.com/v1/search?'
     track_URIs = []
 
+    print("Tracks being added to playlist")
     for track_title in tracks:
         if track_title == "":
             continue
@@ -170,7 +171,7 @@ def GetURIs(tracks, header):
         id_request = requests.get(id_request_url, headers=header) 
         json_id = id_request.json()
         items = json_id['tracks']['items']
-        print("Tracks being added to playlist")
+        
         if len(items) > 0:
             track = items[0]
             print(track['name'])
