@@ -1,5 +1,12 @@
+import pathlib
+import sys
+import spotipy.util as util
+import requests
+import json
+
 '''
 textToSpotify
+
 Approach : 
 Text file with song names and artists
 Read file and create list of song names and artists 
@@ -9,14 +16,6 @@ Use the list from text file and get IDs/URLs for each song in list if available
 Create a playlist from the IDs/URLs 
 Provide the created playlist to User 
 '''
-
-import pathlib
-import sys
-import spotipy.util as util
-import requests
-import json
-
-
 
 #Gets filename from user
 #If user provides text file without .txt extension
@@ -36,7 +35,6 @@ def getFileName():
 '''
 def getTracksfromFile():
     filename = getFileName()
-    
     file = pathlib.Path(filename)
     tracks = []
     if file.exists ():
@@ -51,6 +49,8 @@ def getTracksfromFile():
 
 '''
 Get access token which will be used for further requests
+Access token function will open up the browser and ask the User to 
+provide access to thier spotify account so that playlists can be added 
 '''
 def getAccessToken():
     redirect_uri = 'http://localhost:7777/callback'
@@ -67,6 +67,7 @@ def getAccessToken():
 
 '''
 Get header
+Access token will be passed so that web api requests are authorized 
 '''
 def getHeader(access_token):
     headers = {
@@ -77,10 +78,17 @@ def getHeader(access_token):
     return headers    
     
 '''
-get User id 
+get User ID 
+Headers passed which have access token so all requests are authorized
+We need user ID to create a playlist for that user 
 '''
 def getUserID(headers):
     response = requests.get('https://api.spotify.com/v1/me', headers=headers)
+    if (response.status_code != 201 and response.status_code != 200):
+        print("Error with getting User ID")
+        print("Status code for getting User ID response" + str(response.status_code))
+        print(response.text)
+        sys.exit()
     user_profile = response.json()
     user_id = user_profile['id']
     #print('User ID' + str(user_id))
@@ -89,6 +97,8 @@ def getUserID(headers):
 
 '''
 Get playlist name from User
+User Enters the playlist name which will be used 
+If nothing is entered default text will be used TextToPlaylist
 '''
 def getPlaylistName():
     playListName = input("Enter the name for playlist: ")
@@ -100,6 +110,8 @@ def getPlaylistName():
 
 '''
 Get playlist description name from User
+User Enters the playlist description which will be used 
+If nothing is entered default description will be used
 '''
 def playlistDescription():
     playlist_description = input("Enter description for playlist: ")
@@ -109,10 +121,12 @@ def playlistDescription():
     return playlist_description
 
 '''
-create playlist
+Create playlist
+Pass user ID to playlist is created for authenticated user 
+Returns a playlist ID of created playlist so tracks can be added to
+that playlist
 '''
-def createPlaylist(user_id, headers):
-#Update code to get user defined name and description    
+def createPlaylist(user_id, headers):    
     playlist_name = getPlaylistName()
     playlist_description = playlistDescription()
 
@@ -124,6 +138,13 @@ def createPlaylist(user_id, headers):
     data = json.dumps(data)
 
     response = requests.post('https://api.spotify.com/v1/users/' + user_id + '/playlists', headers=headers, data=data)
+
+    if response.status_code != 201 and response.status_code != 200:
+        print("Error with creation of playlist")
+        print("Status code for playlist creation response" + str(response.status_code))
+        print(response.text)
+        sys.exit()
+
     playlist_json = response.json()
     playlist_id = playlist_json['id']
     return playlist_id
@@ -134,7 +155,7 @@ Get track URIs
 Search spotify API for all the URIs of tracks and create a list to provide
 for creation of playlist
 '''
-#create id list from the list of tracks 
+#Create id list from the list of tracks 
 def GetURIs(tracks, header):
     
     SEARCH_BASE_URL = 'https://api.spotify.com/v1/search?'
@@ -147,6 +168,7 @@ def GetURIs(tracks, header):
         id_request = requests.get(id_request_url, headers=header) 
         json_id = id_request.json()
         items = json_id['tracks']['items']
+        print("Tracks being added to playlist")
         if len(items) > 0:
             track = items[0]
             print(track['name'])
@@ -173,18 +195,25 @@ def GetURIString(trackURIs):
 
 
 '''
-add tracks to playlist
+Add tracks to playlist
+Playlist ID and track URIs are passed along with headers 
+Track URIs are list of all URIs of tracks which need to be added 
 '''
 def addTracksToPlaylist( playlist_id, trackURIString, headers):
     response = requests.get('https://api.spotify.com/v1/playlists/' + playlist_id, headers=headers)
     playlist_json = response.json()
     playlist_id = playlist_json['id']
-    playlist_name = playlist_json['name']
+    #playlist_name = playlist_json['name']
     
     params = (
         ('uris', trackURIString ),
     )
     response = requests.post('https://api.spotify.com/v1/playlists/'+ str(playlist_id) + '/tracks', headers=headers, params=params)
+    if response.status_code != 201 and response.status_code != 200:
+        print("Error with addition of tracks for playlist")
+        print("Status code for addition of tracks response" + str(response.status_code))
+        print(response.text)
+        sys.exit()
     return response.status_code
 
 
@@ -202,6 +231,8 @@ def main():
         print("Playlist has been created")
         playlist_url = 'https://open.spotify.com/playlist/' + playlist_id
         print("You can access your playlist at: " + playlist_url)
+    else:
+        print("There was an error with addition of tracks in playlist")
     
 if __name__ == '__main__':
     main()
