@@ -32,8 +32,11 @@ When we run the program, User will be prompted to enter the name of text file
 
 When filename is provided, a browser window should popup and ask you for authentication which in turn will provide an access token to be used for further requests
 
+If you haven't logged in to Spotify it will ask User to login and provide access to the application/program for updating playlist
 
-![Access Image ](AccessSpotify.png)
+![Access Image ](AccessSpotify.png)  
+
+![Access Image ](SpotifyAppAccess.jpg)
 
 Then we provide Playlist name and description which will be reflected in Spotify
 While making the example I set
