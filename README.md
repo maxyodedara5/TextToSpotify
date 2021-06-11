@@ -8,7 +8,7 @@ Why ? : Some of the playlists on internet are usually listed out in text format,
 
 This project was a submission for CodeInPlace Course a 5-week introductory online Python programming course based on material from the first half of Stanford’s introductory programming course, CS106A.  
 
-The project is also displayed at [CodeInPlace's Public Showcase for projects](https://codeinplace.stanford.edu/2021/showcase/850)
+The project is also displayed at [CodeInPlace's Public Showcase for projects](https://codeinplace.stanford.edu/2021/showcase/915)
 
 For more info about Code in Place you can take a look [here](https://codeinplace.stanford.edu/)
 
