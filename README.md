@@ -8,7 +8,7 @@ Why ? : Some of the playlists on internet are usually listed out in text format,
 
 This project was a submission for CodeInPlace Course a 5-week introductory online Python programming course based on material from the first half of Stanford’s introductory programming course, CS106A.  
 
-The project is also displayed at [CodeInPlace's Public Showcase for projects](https://codeinplace.stanford.edu/2021/showcase/1040)
+The project is also displayed at [CodeInPlace's Public Showcase for projects](https://codeinplace.stanford.edu/2021/showcase/1240)
 
 For more info about Code in Place you can take a look [here](https://codeinplace.stanford.edu/)
 
@@ -17,6 +17,10 @@ For more info about Code in Place you can take a look [here](https://codeinplace
 Following libraries need to be installed  
 * spotipy
 * requests
+
+## Dependencies
+To get started, install spotipy and create an app on https://developers.spotify.com/.
+Add your new ID, SECRETa and redirect URL to textToSpotify.py
 
 ## Working logic
 
