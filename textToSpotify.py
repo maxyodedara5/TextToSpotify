@@ -55,10 +55,10 @@ Access token function will open up the browser and ask the User to
 provide access to thier spotify account so that playlists can be added 
 '''
 def getAccessToken():
-    redirect_uri = 'http://localhost:7777/callback'
+    redirect_uri = 'YOUR_REDIRECT_URL_GOES_HERE'
     scope = 'user-read-private user-read-email playlist-read-collaborative playlist-modify-public playlist-modify-private'
-    SPOTIPY_CLIENT_ID  = '01124143b207431fa629a5ac2f1784be'
-    SPOTIPY_CLIENT_SECRET  = '473a32a70cab42c78d246ba995e681ce'
+    SPOTIPY_CLIENT_ID  = 'YOUR_SPOTIFY_CLIENT_ID_GOES_HERE'
+    SPOTIPY_CLIENT_SECRET  = 'YOUR_SPOTIFY_CLIENT_SECRET_GOES_HERE'
     token = util.prompt_for_user_token(scope=scope, 
                                    client_id=SPOTIPY_CLIENT_ID,   
                                    client_secret=SPOTIPY_CLIENT_SECRET,     
